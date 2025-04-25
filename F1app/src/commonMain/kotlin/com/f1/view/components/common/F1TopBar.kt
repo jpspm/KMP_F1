@@ -1,4 +1,4 @@
-package com.f1.view.components
+package com.f1.view.components.common
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -12,11 +12,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.f1.ui.theme.F1Red
-import com.f1.ui.theme.F1Theme
 import f1app.f1app.generated.resources.Res
 import f1app.f1app.generated.resources.f1_logo
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,12 +36,4 @@ fun F1TopBar(modifier: Modifier = Modifier) {
             actionIconContentColor = Color.Transparent
         )
     )
-}
-
-@Preview
-@Composable
-fun F1TopBarPreview() {
-    F1Theme {
-        F1TopBar()
-    }
 }
