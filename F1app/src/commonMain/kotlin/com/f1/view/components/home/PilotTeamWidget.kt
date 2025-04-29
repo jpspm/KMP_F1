@@ -71,15 +71,15 @@ fun PilotTeamWidget(
 
     }) {
         Row(
-            modifier = Modifier.defaultMinSize((imageSize*0.735).dp)
+            modifier = Modifier.defaultMinSize((1.3*imageSize).dp)
                 .onGloballyPositioned { coordinates ->
                     rowWidth = coordinates.size.width
                 }, horizontalArrangement = Arrangement.SpaceBetween) {
-            Text(pilotName, style = F1Typography().labelLarge, fontSize = (baseTextLength * 0.8).sp)
+            Text(pilotName, style = F1Typography().labelLarge, fontSize = (baseTextLength).sp)
             Text(
                 pilotNumber.toString(),
                 style = F1Typography().labelLarge,
-                fontSize = (baseTextLength * 0.8).sp,
+                fontSize = (baseTextLength).sp,
                 color = Color(color), modifier = Modifier.defaultMinSize(minWidth = (baseTextLength).dp), textAlign = TextAlign.End
             )
         }
@@ -92,7 +92,7 @@ fun PilotTeamWidget(
             model = image,
             contentDescription = null,
             contentScale = ContentScale.Crop,
-            modifier = Modifier.size((imageSize*0.735).dp).padding(end = 6.dp)
+            modifier = Modifier.size((1.3*imageSize).dp).padding(end = 6.dp)
         )
     }
 }

@@ -1,13 +1,8 @@
 package com.f1.view.components.home
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,28 +10,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil3.compose.AsyncImage
-import com.f1.ui.theme.F1DarkGray
 import com.f1.ui.theme.F1LightGray
 import com.f1.ui.theme.F1Typography
 import com.f1.ui.theme.LocalBaseSize
-import com.f1.utils.WindowWidthSizeClass
-import com.f1.utils.WindowsSizeClass
 import com.f1.view.components.common.ColumnWithBorder
-import com.f1.view.components.common.IndicativeColor
-import f1app.f1app.generated.resources.Res
-import f1app.f1app.generated.resources.home_pnts
-import org.jetbrains.compose.resources.stringResource
+import com.f1.view.components.common.InfoRowWithIndicativeColor
+import com.f1.view.components.common.LeaderWidgetDriverDetails
+import com.f1.view.components.common.PositionPointsRow
 
 @Composable
 fun LeaderHomeWidget(
@@ -47,62 +32,46 @@ fun LeaderHomeWidget(
     color: Long,
     points: String,
     team: String,
-    number: String
+    number: String,
+    nation: String,
+    position: String
 ) {
     var rowWidth by remember { mutableStateOf(0) }
     val baseSize = LocalBaseSize.current
-    val imageSize = baseSize.imageSize
     val baseTextLength = baseSize.baseTextLength
-    BoxWithConstraints(modifier = modifier.wrapContentSize()) {
-        ColumnWithBorder{
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(end = 3.dp)
-                    .onGloballyPositioned { coordinates ->
-                        rowWidth = coordinates.size.width
-                    }
-            ) {
-                IndicativeColor(width = 10.dp, height = (2 * baseTextLength).dp, color = color)
-                Column(modifier = Modifier.padding(start = 8.dp, end = 30.dp)) {
-                    Text(
-                        name,
-                        style = F1Typography().displayMedium,
-                        fontSize = (baseTextLength * 0.6).sp
-                    )
-                    Text(
-                        lastName,
-                        style = F1Typography().displayMedium,
-                        fontSize = baseTextLength.sp
-                    )
-                }
-                Column {
-                    Text(points, style = F1Typography().labelLarge, fontSize = (baseTextLength*0.7).sp)
-                    Text(stringResource(Res.string.home_pnts), style = F1Typography().labelLarge, fontSize = (baseTextLength*0.7).sp)
-                }
-            }
-
-            Divider(
-                color = F1LightGray,
-                thickness = 1.dp,
-                modifier = Modifier.width(with(LocalDensity.current) { rowWidth.toDp() })
-            )
-            Row {
-                Column(verticalArrangement = Arrangement.SpaceBetween) {
-                    Text(team, style = F1Typography().labelLarge, fontSize = (baseTextLength*0.7).sp)
-                    Text(
-                        number,
-                        style = F1Typography().titleLarge,
-                        fontSize = (2.5 * baseTextLength).sp,
-                        color = Color(color)
-                    )
-                }
-                AsyncImage(
-                    model = image,
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.size(imageSize.dp)
+    ColumnWithBorder(modifier = modifier) {
+        PositionPointsRow(
+            position = position,
+            points = points,
+            modifier = Modifier.onGloballyPositioned { coordinates ->
+                rowWidth = coordinates.size.width
+            })
+        Divider(
+            color = F1LightGray,
+            thickness = 1.dp,
+            modifier = Modifier.width(with(LocalDensity.current) { rowWidth.toDp() })
+        )
+        InfoRowWithIndicativeColor(color = color, composableIndicative = {
+            Column(modifier = Modifier.padding(start = 8.dp, end = 30.dp)) {
+                Text(
+                    name,
+                    style = F1Typography().displayMedium,
+                    fontSize = (baseTextLength * 0.6).sp
+                )
+                Text(
+                    lastName,
+                    style = F1Typography().displayMedium,
+                    fontSize = baseTextLength.sp
                 )
             }
-        }
+        }, composableFinalRow = {
+            Text(nation, style = F1Typography().displayMedium, fontSize = baseTextLength.sp)
+        })
+        Divider(
+            color = F1LightGray,
+            thickness = 1.dp,
+            modifier = Modifier.width(with(LocalDensity.current) { rowWidth.toDp() })
+        )
+        LeaderWidgetDriverDetails(team = team, number = number, image = image, color = color)
     }
 }

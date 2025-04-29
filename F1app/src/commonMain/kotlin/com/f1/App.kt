@@ -3,10 +3,8 @@ package com.f1
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -30,19 +28,15 @@ fun App() {
         Scaffold(topBar = { F1TopBar() }) {
             BoxWithConstraints {
                 val windowSize = mapToWindowSizeClass(maxWidth, maxHeight)
-                val baseSize = when (windowSize.widthSizeClass){
+                val baseSize = when (windowSize.widthSizeClass) {
                     WindowWidthSizeClass.SmallCompact -> BaseSize(115, 18)
                     WindowWidthSizeClass.MediumCompact -> BaseSize(130, 23)
-                    WindowWidthSizeClass.Medium-> BaseSize(200, 20)
+                    WindowWidthSizeClass.Medium -> BaseSize(200, 20)
                     else -> BaseSize(250, 20)
                 }
                 CompositionLocalProvider(LocalBaseSize provides baseSize) {
-                    Column(Modifier.padding(it)) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth()
-                                .padding(horizontal = 8.dp, vertical = 8.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
+                    LazyColumn(Modifier.padding(it).padding(horizontal = 8.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                        item {
                             LeaderHomeWidget(
                                 name = "Gabriel",
                                 lastName = "Bortoleto",
@@ -50,35 +44,41 @@ fun App() {
                                 points = "200",
                                 color = 0xFF52E252,
                                 team = "Sauber",
-                                number = "5",
-                                modifier = Modifier
-                            )
-                            TeamHomeWidget(
-                                teamName = "Red Bull Racing",
-                                points = 125,
-                                color = 0xFF3671C6,
-                                firstPilotName = "VER",
-                                firstPilotNumber = 1,
-                                firstPilotImage = "https://www.formula1.com/content/dam/fom-website/drivers/M/MAXVER01_Max_Verstappen/maxver01.png",
-                                secondPilotName = "TSU",
-                                secondPilotNumber = 22,
-                                secondPilotImage = "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/Y/YUKTSU01_Yuki_Tsunoda/yuktsu01.png",
-                                modifier = Modifier.wrapContentWidth()
+                                number = "55",
+                                modifier = Modifier.padding(top = 8.dp),
+                                nation = "BRA",
+                                position = "1"
                             )
                         }
-                        NextRace(
-                            modifier = Modifier.padding(horizontal = 8.dp),
-                            nextRaceTitle = "FORMULA 1 CRIPTO.COM MIAMI GRAND PRIX 2025",
-                            circuit = "https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/f_auto/q_auto/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Miami%20carbon",
-                            intervalDays = "02-04",
-                            month = "MAY",
-                            event = "PRACTICE 1",
-                            eventDay = "FRIDAY",
-                            eventHours = "13:30-14:30",
-                            daysRemain = "05",
-                            hrsRemain = "21",
-                            minsRemain = "11"
-                        )
+                        item {
+                            TeamHomeWidget(
+                                teamName = "Red Bull Racing",
+                                points = "125",
+                                color = 0xFF3671C6,
+                                position = "1",
+                                firstPilotName = "Verstappen",
+                                firstPilotNumber = 1,
+                                firstPilotImage = "https://www.formula1.com/content/dam/fom-website/drivers/M/MAXVER01_Max_Verstappen/maxver01.png",
+                                secondPilotName = "Tsunoda",
+                                secondPilotNumber = 22,
+                                secondPilotImage = "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/Y/YUKTSU01_Yuki_Tsunoda/yuktsu01.png",
+                            )
+                        }
+                        item {
+                            NextRace(
+                                modifier = Modifier.padding(horizontal = 8.dp),
+                                nextRaceTitle = "FORMULA 1 CRIPTO.COM MIAMI GRAND PRIX 2025",
+                                circuit = "https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/f_auto/q_auto/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Miami%20carbon",
+                                intervalDays = "02-04",
+                                month = "MAY",
+                                event = "PRACTICE 1",
+                                eventDay = "FRIDAY",
+                                eventHours = "13:30-14:30",
+                                daysRemain = "05",
+                                hrsRemain = "21",
+                                minsRemain = "11"
+                            )
+                        }
                     }
                 }
             }
