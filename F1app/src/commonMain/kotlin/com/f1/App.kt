@@ -19,6 +19,7 @@ import com.f1.utils.WindowWidthSizeClass
 import com.f1.utils.mapToWindowSizeClass
 import com.f1.view.components.common.F1TopBar
 import com.f1.view.components.home.LeaderHomeWidget
+import com.f1.view.components.home.NextRace
 import com.f1.view.components.home.TeamHomeWidget
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -65,6 +66,19 @@ fun App() {
                                 modifier = Modifier.wrapContentWidth()
                             )
                         }
+                        NextRace(
+                            modifier = Modifier.padding(horizontal = 8.dp),
+                            nextRaceTitle = "FORMULA 1 CRIPTO.COM MIAMI GRAND PRIX 2025",
+                            circuit = "https://media.formula1.com/image/upload/f_auto,c_limit,w_1440,q_auto/f_auto/q_auto/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Miami%20carbon",
+                            intervalDays = "02-04",
+                            month = "MAY",
+                            event = "PRACTICE 1",
+                            eventDay = "FRIDAY",
+                            eventHours = "13:30-14:30",
+                            daysRemain = "05",
+                            hrsRemain = "21",
+                            minsRemain = "11"
+                        )
                     }
                 }
             }
