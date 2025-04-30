@@ -7,6 +7,7 @@ val F1Red = Color(0xFFFF1801)
 val F1Black = Color(0xFF000000)
 val F1White = Color(0xFFFFFFFF)
 val F1DarkGray = Color(0xFF1D1D1B)
+val F1LightGray = Color(0xffe4e4e5)
 
 val F1LightColorScheme = lightColorScheme(
     primary = F1Red,
