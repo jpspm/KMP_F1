@@ -37,7 +37,12 @@ fun TeamHomeWidget(
     BoxWithConstraints(modifier = Modifier.wrapContentSize()) {
         val baseSize = LocalBaseSize.current
         val baseTextLength = baseSize.baseTextLength
-        ColumnWithBorder(modifier = modifier) {
+        ColumnWithBorder(
+            modifier = modifier,
+            drawTop = true,
+            drawRight = true,
+            roundTopEnd = true
+        ) {
             PositionPointsRow(position = position, points = points)
             Divider(
                 color = F1LightGray,

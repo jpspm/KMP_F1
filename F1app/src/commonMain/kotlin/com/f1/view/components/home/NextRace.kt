@@ -18,6 +18,7 @@ import coil3.compose.AsyncImage
 import com.f1.ui.theme.F1Black
 import com.f1.ui.theme.F1Typography
 import com.f1.ui.theme.LocalBaseSize
+import com.f1.view.components.common.ColumnWithBorder
 
 @Composable
 fun NextRace(
@@ -33,59 +34,27 @@ fun NextRace(
     hrsRemain: String,
     minsRemain: String
 ) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = modifier.drawBehind {
-        val radius = 12.dp.toPx()
-        val strokeWidth = 2.dp.toPx()
-        drawArc(
-            color = F1Black,
-            startAngle = 180f,
-            sweepAngle = 90f,
-            useCenter = false,
-            topLeft = Offset(0f, 0f),
-            size = Size(radius * 2, radius * 2),
-            style = Stroke(width = strokeWidth)
-        )
-
-        drawArc(
-            color = F1Black,
-            startAngle = -90f,
-            sweepAngle = 90f,
-            useCenter = false,
-            topLeft = Offset(size.width - 2 * radius, 0f),
-            size = Size(radius * 2, radius * 2),
-            style = Stroke(width = strokeWidth)
-        )
-
-        drawArc(
-            color = F1Black,
-            startAngle = 90f,
-            sweepAngle = 90f,
-            useCenter = false,
-            topLeft = Offset(0f, size.height - 2 * radius),
-            size = Size(radius * 2, radius * 2),
-            style = Stroke(width = strokeWidth)
-        )
-
-        drawArc(
-            color = F1Black,
-            startAngle = 0f,
-            sweepAngle = 90f,
-            useCenter = false,
-            topLeft = Offset(size.width - 2 * radius, size.height - 2 * radius),
-            size = Size(radius * 2, radius * 2),
-            style = Stroke(width = strokeWidth)
-        )
-
-    }){
+    ColumnWithBorder(
+        roundTopEnd = true,
+        roundBottomEnd = true,
+        roundBottomStart = true,
+        roundTopStart = true,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         val baseSize = LocalBaseSize.current
         val baseTextLength = baseSize.baseTextLength
         val imageSize = baseSize.imageSize
-        Text(nextRaceTitle, style = F1Typography().titleLarge, fontSize = (baseTextLength).sp, textAlign = TextAlign.Center)
+        Text(
+            nextRaceTitle,
+            style = F1Typography().titleLarge,
+            fontSize = (baseTextLength).sp,
+            textAlign = TextAlign.Center
+        )
         AsyncImage(
             model = circuit,
             contentDescription = null,
             contentScale = ContentScale.Crop,
-            modifier = Modifier.size(height = (1.5*imageSize).dp, width = (3*imageSize).dp)
+            modifier = Modifier.size(height = (1.5 * imageSize).dp, width = (3 * imageSize).dp)
         )
         NextRaceCountdown(
             intervalDays = intervalDays,

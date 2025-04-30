@@ -39,7 +39,7 @@ fun LeaderHomeWidget(
     var rowWidth by remember { mutableStateOf(0) }
     val baseSize = LocalBaseSize.current
     val baseTextLength = baseSize.baseTextLength
-    ColumnWithBorder(modifier = modifier) {
+    ColumnWithBorder(modifier = modifier, drawTop = true, drawRight = true, roundTopEnd = true) {
         PositionPointsRow(
             position = position,
             points = points,
